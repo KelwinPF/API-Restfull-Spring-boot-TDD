@@ -1,26 +1,16 @@
-package com.wallet.entity;
+package com.wallet.dto;
 
-import lombok.Data;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
-import javax.annotation.Generated;
-import java.io.Serializable;
-import javax.persistence.*;
+public class UserDTO {
 
-
-@Entity
-@Data
-public class User implements Serializable {
-
-    private static final long serialVersionUID=1693850165739564098L;
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
-    private String name;
+    @Email(message="email invalido")
     private String email;
+    private String name;
+    @NotNull
+    private String password;
 
     public void setEmail(String s) {
         this.email = s;
@@ -31,7 +21,7 @@ public class User implements Serializable {
     public void setName(String s) {
         this.name = s;
     }
-    public void setId(Long s){
+    public void setId(Long s) {
         this.id = s;
     }
 
@@ -46,7 +36,6 @@ public class User implements Serializable {
     public String getPassword() {
         return this.password;
     }
-
     public Long getId() {
         return this.id;
     }
