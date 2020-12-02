@@ -2,13 +2,14 @@ package com.wallet.entity;
 
 import lombok.Data;
 
-import javax.annotation.Generated;
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 
 @Entity
 @Data
+@Table(name="users")
 public class User implements Serializable {
 
     private static final long serialVersionUID=1693850165739564098L;
@@ -20,6 +21,7 @@ public class User implements Serializable {
     private String password;
     @Column(nullable = false)
     private String name;
+    @Email(message="Email inválido")
     private String email;
 
     public void setEmail(String s) {
@@ -47,7 +49,8 @@ public class User implements Serializable {
         return this.password;
     }
 
-    public Long getId() {
+    public Long getId(){
         return this.id;
     }
+
 }

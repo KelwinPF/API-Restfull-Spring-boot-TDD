@@ -1,12 +1,15 @@
 package com.wallet.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
     private Long id;
-    @Email(message="email invalido")
+    @Email(message="Email inválido")
     private String email;
     private String name;
     @NotNull

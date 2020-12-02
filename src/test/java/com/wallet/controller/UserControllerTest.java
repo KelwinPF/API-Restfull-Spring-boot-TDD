@@ -1,5 +1,8 @@
 package com.wallet.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wallet.dto.UserDTO;
@@ -19,6 +22,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import javax.xml.bind.annotation.XmlElementRefs;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,7 +52,12 @@ public class UserControllerTest {
         mvc.perform(MockMvcRequestBuilders.post(URL)
                 .content(getJsonPayload(Id,EMAIL,NAME,PASSWORD))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.id").value(Id))
+                .andExpect(jsonPath("$.data.email").value(EMAIL))
+                .andExpect(jsonPath("$.data.name").value(NAME))
+                .andExpect(jsonPath("$.data.password").doesNotExist());
     }
 
     @Test

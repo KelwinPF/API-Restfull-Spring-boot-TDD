@@ -1,14 +1,13 @@
 package com.wallet.service;
 
 
-import com.repository.UserRepository;
+import com.wallet.repository.UserRepository;
 import com.wallet.entity.User;
 import com.wallet.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
@@ -28,7 +27,7 @@ public class UserServiceTest {
     UserService service;
 
     public void setUp(){
-        BDDMockito.given(repo.findoByEmail(Mockito.anyString())).willReturn(Optional.of(new User()));
+        BDDMockito.given(repo.findByEmail(Mockito.anyString())).willReturn(Optional.of(new User()));
     }
 
     @Test
