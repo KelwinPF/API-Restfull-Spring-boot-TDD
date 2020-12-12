@@ -2,12 +2,14 @@ package com.wallet.config;
 
 import com.wallet.security.config.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,6 +29,7 @@ public class SwaggerConfig {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Qualifier("JwtUserDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -47,7 +50,6 @@ public class SwaggerConfig {
     @Bean
     public SecurityConfiguration security() {
         String token;
-        
         try {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername("development@swagger.user");
             token = this.jwtTokenUtil.getToken(userDetails);
