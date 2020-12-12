@@ -168,7 +168,7 @@ public class WalletItemRepositoryTest{
         repo.save(wi2);
 
         PageRequest pg = PageRequest.of(0, 10);
-        Page<WalletItem> response = repo.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(savedWalletId, DATE, currentDatePlusFiveDays, pg);
+        Page<WalletItem> response = repo.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(savedWalletId, DATE, currentDatePlusFiveDays, pg,10);
 
         assertEquals(response.getContent().size(), 2);
         assertEquals(response.getTotalElements(), 2);

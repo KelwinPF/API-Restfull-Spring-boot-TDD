@@ -17,6 +17,7 @@ public class Response<T> {
     private List<String> Errors;
 
     public void setData(T convertEntityToDTO) {
+        this.data = convertEntityToDTO;
     }
 
     public List<String> getErrors() {

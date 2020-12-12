@@ -1,11 +1,14 @@
 package com.wallet.entity;
 
+import javafx.scene.control.IndexRange;
 import lombok.Data;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
+import com.wallet.util.RoleEnum;
 
 @Entity
 @Data
@@ -23,7 +26,13 @@ public class User implements Serializable {
     private String name;
     @Email(message="Email inválido")
     private String email;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
 
+    public void setRole(RoleEnum s) {
+        this.role = s;
+    }
     public void setEmail(String s) {
         this.email = s;
     }
@@ -44,7 +53,9 @@ public class User implements Serializable {
     public String getName() {
         return this.name;
     }
-
+    public RoleEnum getRole() {
+        return this.role;
+    }
     public String getPassword() {
         return this.password;
     }

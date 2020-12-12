@@ -94,7 +94,7 @@ public class WalletItemControllerTest {
         User user = new User();
         user.setId(1L);
 
-        BDDMockito.given(service.findBetweenDates(Mockito.anyLong(), Mockito.any(Date.class), Mockito.any(Date.class), Mockito.anyInt())).willReturn(page);
+        BDDMockito.given(service.findBetweenDates(Mockito.anyLong(), Mockito.any(Date.class), Mockito.any(Date.class), Mockito.anyInt(), Mockito.anyInt())).willReturn(page);
         BDDMockito.given(userService.findByEmail(Mockito.anyString())).willReturn(Optional.of(user));
         BDDMockito.given(userWalletService.findByUsersIdAndWalletId(Mockito.anyLong(), Mockito.anyLong())).willReturn(Optional.of(new UserWallet()));
 
