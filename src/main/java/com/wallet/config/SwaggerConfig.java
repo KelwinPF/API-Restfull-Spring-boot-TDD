@@ -47,6 +47,7 @@ public class SwaggerConfig {
     @Bean
     public SecurityConfiguration security() {
         String token;
+        
         try {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername("development@swagger.user");
             token = this.jwtTokenUtil.getToken(userDetails);
