@@ -1,6 +1,5 @@
 package com.wallet.entity;
 
-import javafx.scene.control.IndexRange;
 import lombok.Data;
 
 import java.io.Serializable;
