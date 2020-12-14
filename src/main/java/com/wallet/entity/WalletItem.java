@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.wallet.util.TypeEnum;
@@ -25,7 +16,7 @@ public class WalletItem implements Serializable{
     /**
      *
      */
-    private static final long serialVersionUID = -1796790346218894235L;
+    private static final long serialVersionUID = 6079769300175684582L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,21 +34,8 @@ public class WalletItem implements Serializable{
     @NotNull
     private BigDecimal value;
 
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -65,7 +43,7 @@ public class WalletItem implements Serializable{
     }
 
     public Wallet getWallet() {
-        return wallet;
+        return this.wallet;
     }
 
     public void setWallet(Wallet wallet) {
@@ -73,7 +51,7 @@ public class WalletItem implements Serializable{
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -81,7 +59,7 @@ public class WalletItem implements Serializable{
     }
 
     public TypeEnum getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(TypeEnum type) {
@@ -89,11 +67,18 @@ public class WalletItem implements Serializable{
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public BigDecimal getValue() {
+        return this.value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
+    }
 }

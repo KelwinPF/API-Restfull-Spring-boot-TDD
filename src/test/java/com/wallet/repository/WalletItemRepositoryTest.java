@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,6 +37,7 @@ public class WalletItemRepositoryTest{
     private Long savedWalletItemId = null;
     private Long savedWalletId = null;
 
+    @Autowired
     WalletItemRepository repo;
     @Autowired
     WalletRepository repo2;
@@ -48,7 +50,6 @@ public class WalletItemRepositoryTest{
         repo2.save(w);
 
         WalletItem wi = new WalletItem();
-        wi.setId(1L);
         wi.setDate(DATE);
         wi.setType(TYPE);
         wi.setDescription(DESCRIPTION);
@@ -167,8 +168,8 @@ public class WalletItemRepositoryTest{
         repo.save(wi);
         repo.save(wi2);
 
-        PageRequest pg = PageRequest.of(0, 10);
-        Page<WalletItem> response = repo.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(savedWalletId, DATE, currentDatePlusFiveDays, pg,10);
+        PageRequest pg = PageRequest.of(0,10, Sort.unsorted());
+        Page<WalletItem> response = repo.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(savedWalletId, DATE, currentDatePlusFiveDays, pg);
 
         assertEquals(response.getContent().size(), 2);
         assertEquals(response.getTotalElements(), 2);

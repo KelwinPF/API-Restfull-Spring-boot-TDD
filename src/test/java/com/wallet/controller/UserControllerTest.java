@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wallet.dto.UserDTO;
 import com.wallet.entity.User;
 import com.wallet.services.UserService;
+import com.wallet.util.RoleEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -34,9 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest {
 
     private static final Long Id = 1L;
-    private static final String EMAIL = "email@email.com";
+    private static final String EMAIL = "teste@email.com";
     private static final String NAME = "User test";
-    private static final String PASSWORD = "12345";
+    private static final String PASSWORD = "123456";
     private static final String URL = "/user";
 
     @MockBean
@@ -53,27 +54,29 @@ public class UserControllerTest {
                 .content(getJsonPayload(Id,EMAIL,NAME,PASSWORD))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
-                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.id").value(Id))
                 .andExpect(jsonPath("$.data.email").value(EMAIL))
                 .andExpect(jsonPath("$.data.name").value(NAME))
+                .andExpect(jsonPath("$.data.role").value(RoleEnum.ROLE_ADMIN.toString()))
                 .andExpect(jsonPath("$.data.password").doesNotExist());
     }
 
     @Test
     public void testSaveInvalidUser() throws JsonProcessingException,Exception{
-        BDDMockito.given(service.save(Mockito.any(User.class))).willReturn(getMockUser());
-        mvc.perform(MockMvcRequestBuilders.post(URL)
-                .content(getJsonPayload(Id,EMAIL,NAME,PASSWORD))
+        mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(Id, "email", NAME, PASSWORD))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0]").value("Email inválido"));
     }
 
     public User getMockUser(){
         User u = new User();
+        u.setId(Id);
         u.setEmail(EMAIL);
         u.setName(NAME);
         u.setPassword(PASSWORD);
+        u.setRole(RoleEnum.ROLE_ADMIN);
 
         return u;
     }
@@ -84,6 +87,7 @@ public class UserControllerTest {
         dto.setEmail(Email);
         dto.setName(name);
         dto.setPassword(password);
+        dto.setRole(RoleEnum.ROLE_ADMIN.toString());
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(dto);

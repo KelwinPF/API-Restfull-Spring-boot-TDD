@@ -4,6 +4,7 @@ package com.wallet.service;
 import com.wallet.repository.UserRepository;
 import com.wallet.entity.User;
 import com.wallet.services.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -28,13 +29,14 @@ public class UserServiceTest {
     @Autowired
     UserService service;
 
+    @Before
     public void setUp(){
         BDDMockito.given(repo.findByEmail(Mockito.anyString())).willReturn(Optional.of(new User()));
     }
 
     @Test
     public void testFindByEmail(){
-        Optional<User> user = service.findByEmail("emailteste@teste.com");
+        Optional<User> user = service.findByEmail("email@teste.com");
 
         assertTrue(user.isPresent());
     }

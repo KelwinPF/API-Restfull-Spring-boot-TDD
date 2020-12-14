@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class WalletDTO {
 
-    private long  id;
+    private Long id;
     @NotNull
     private String name;
     @NotNull

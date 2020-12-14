@@ -61,9 +61,9 @@ public class WalletItemServiceTest {
         list.add(getMockWalletItem());
         Page<WalletItem> page = new PageImpl(list);
 
-        BDDMockito.given(repository.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(Mockito.anyLong(), Mockito.any(Date.class), Mockito.any(Date.class), Mockito.any(PageRequest.class),Mockito.any(Integer.class))).willReturn(page);
+        BDDMockito.given(repository.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(Mockito.anyLong(), Mockito.any(Date.class), Mockito.any(Date.class), Mockito.any(PageRequest.class))).willReturn(page);
 
-        Page<WalletItem> response = service.findBetweenDates(1L, new Date(), new Date(), 0,10);
+        Page<WalletItem> response = service.findBetweenDates(1L, new Date(), new Date(), 0);
 
         assertNotNull(response);
         assertEquals(response.getContent().size(), 1);
@@ -100,7 +100,7 @@ public class WalletItemServiceTest {
         w.setId(1L);
 
         WalletItem wi = new WalletItem();
-        wi.setId(null);
+        wi.setId(1L);
         wi.setDate(DATE);
         wi.setType(TYPE);
         wi.setDescription(DESCRIPTION);

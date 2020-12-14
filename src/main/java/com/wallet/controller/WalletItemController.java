@@ -42,8 +42,10 @@ import com.wallet.response.Response;
 @RestController
 @RequestMapping("wallet-item")
 public class WalletItemController {
+
     @Autowired
     private WalletItemService service;
+
     @Autowired
     private UserWalletService userWalletService;
 
@@ -59,7 +61,6 @@ public class WalletItemController {
 
             return ResponseEntity.badRequest().body(response);
         }
-        System.out.println(this.convertDtoToEntity(dto));
         WalletItem wi = service.save(this.convertDtoToEntity(dto));
 
         response.setData(this.convertEntityToDto(wi));
@@ -70,8 +71,7 @@ public class WalletItemController {
     public ResponseEntity<Response<Page<WalletItemDTO>>> findBetweenDates(@PathVariable("wallet") Long wallet,
                                                                           @RequestParam("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
                                                                           @RequestParam("endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate,
-                                                                          @RequestParam(name = "page", defaultValue = "0") int page,
-                                                                          @RequestParam(name = "itens_per_page", defaultValue = "10") int itens_per_page) {
+                                                                          @RequestParam(name = "page", defaultValue = "0") int page) {
 
         Response<Page<WalletItemDTO>> response = new Response<Page<WalletItemDTO>>();
 
@@ -83,8 +83,8 @@ public class WalletItemController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Page<WalletItem> items = service.findBetweenDates(wallet, startDate, endDate, page,itens_per_page);
-        Page<WalletItemDTO> dto = items.map(this::convertEntityToDto);
+        Page<WalletItem> items = service.findBetweenDates(wallet, startDate, endDate, page);
+        Page<WalletItemDTO> dto = items.map(i -> this.convertEntityToDto(i));
         response.setData(dto);
         return ResponseEntity.ok().body(response);
     }
@@ -167,7 +167,6 @@ public class WalletItemController {
         Wallet w = new Wallet();
         w.setId(dto.getWallet());
         wi.setWallet(w);
-
         return wi;
     }
 

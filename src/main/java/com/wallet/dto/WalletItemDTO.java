@@ -8,12 +8,9 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Data;
-
-@Data
 public class WalletItemDTO {
 
-    private long id;
+    private Long id;
     @NotNull(message = "Insira o id da carteira")
     private Long wallet;
     @NotNull(message = "Informe uma data")
@@ -27,16 +24,16 @@ public class WalletItemDTO {
     @NotNull(message = "Informe um valor")
     private BigDecimal value;
 
-    public long getId() {
-        return id;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Long getWallet() {
-        return wallet;
+        return this.wallet;
     }
 
     public void setWallet(Long wallet) {
@@ -44,7 +41,7 @@ public class WalletItemDTO {
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -52,7 +49,7 @@ public class WalletItemDTO {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(String type) {
@@ -60,7 +57,7 @@ public class WalletItemDTO {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -68,7 +65,7 @@ public class WalletItemDTO {
     }
 
     public BigDecimal getValue() {
-        return value;
+        return this.value;
     }
 
     public void setValue(BigDecimal value) {

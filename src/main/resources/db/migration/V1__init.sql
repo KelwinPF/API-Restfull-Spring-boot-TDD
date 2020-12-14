@@ -3,7 +3,6 @@ id serial,
 name varchar(50),
 password varchar,
 email varchar(100),
-role varchar(255),
 primary key (id));
 
 
