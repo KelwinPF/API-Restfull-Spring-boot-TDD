@@ -21,15 +21,4 @@ public class UserWallet implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Wallet wallet;
 
-    public User getUsers() {
-        return this.users;
-    }
-    public Long getId(){return this.id;}
-    public Wallet getWallet(){return this.wallet;}
-
-    public void setId(Long s){
-        this.id = s;
-    }
-    public void setUsers(User u){this.users = u;}
-    public void setWallet(Wallet w){this.wallet = w;}
 }

@@ -8,9 +8,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.wallet.util.TypeEnum;
+import lombok.Data;
 
 @Entity
 @Table(name = "wallet_items")
+@Data
 public class WalletItem implements Serializable{
 
     /**
@@ -34,51 +36,4 @@ public class WalletItem implements Serializable{
     @NotNull
     private BigDecimal value;
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Wallet getWallet() {
-        return this.wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
-    }
-
-    public Date getDate() {
-        return this.date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public TypeEnum getType() {
-        return this.type;
-    }
-
-    public void setType(TypeEnum type) {
-        this.type = type;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getValue() {
-        return this.value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
 }

@@ -1,8 +1,11 @@
 package com.wallet.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@Data
 public class WalletDTO {
 
     private Long id;
@@ -11,24 +14,4 @@ public class WalletDTO {
     @NotNull
     private BigDecimal value;
 
-    public void setName(String s) {
-        this.name = s;
-    }
-    public void setId(Long s){
-        this.id = s;
-    }
-    public void setValue(BigDecimal value){
-        this.value = value;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public Long getId(){
-        return this.id;
-    }
-
-    public BigDecimal getValue(){
-        return this.value;
-    }
 }

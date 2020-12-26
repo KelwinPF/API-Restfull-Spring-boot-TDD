@@ -29,38 +29,4 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
-    public void setRole(RoleEnum s) {
-        this.role = s;
-    }
-    public void setEmail(String s) {
-        this.email = s;
-    }
-    public void setPassword(String s) {
-        this.password = s;
-    }
-    public void setName(String s) {
-        this.name = s;
-    }
-    public void setId(Long s){
-        this.id = s;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-    public RoleEnum getRole() {
-        return this.role;
-    }
-    public String getPassword() {
-        return this.password;
-    }
-
-    public Long getId(){
-        return this.id;
-    }
-
 }
