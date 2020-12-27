@@ -67,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll();
         http.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/auth/**", "/configuration/security", "/user/**", "/hello-world")
+                .antMatchers("/auth/**", "/configuration/security", "/user/**", "/hello-world","/swagger-resources/**","/swagger-ui.html","/v2/api-docs")
                 .permitAll().anyRequest().authenticated();
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         http.headers().cacheControl();
